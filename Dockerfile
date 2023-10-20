@@ -1,5 +1,4 @@
 FROM node:alpine
-MAINTAINER Sille Van Landschoot <info@sillevl.be>
 
 # Create app directory
 RUN mkdir -p /usr/src/app
@@ -14,4 +13,4 @@ COPY . /usr/src/app
 
 VOLUME /config
 
-CMD [ "npm", "start" , "--", "--config", "/config/settings.json"]
+CMD [ "npm", "start" , "--config", "/config/settings.json"]

@@ -68,3 +68,9 @@ mqtt.on('message', (topic, message) => {
   }
   teletask.set(Teletask.functions[fnc], number, value)
 })
+
+mqtt.on('error', (error) => {
+  console.error(`MQTT error: ${error}`);
+  process.exit(1);
+
+});
