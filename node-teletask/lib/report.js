@@ -5,6 +5,7 @@ var settings = require('./settings');
 
 parse = function(data){
 	data = Array.prototype.slice.call(new Uint8Array(data));
+	
 
 	checkStartByte(data);
 	checkSize(data);
@@ -39,6 +40,9 @@ parse = function(data){
 			};
 			report.getTemperature = function(unit){return getTemperature(readShort(data,8), unit);};
 			break;
+		case functions.motor:
+			report.motorstopped = report.size === 12; // 12 bytes = motor stopped, 17 bytes = motor running
+			report.motorvalue = getMotorValue(data);
 	}
 
 	return report;
@@ -72,6 +76,10 @@ getNumber = function(data){
 
 getValue = function(data){
 	return readShort(data, 7);
+};
+
+getMotorValue = function(data){
+	return data[11];
 };
 
 readShort = function(data, startIndex){

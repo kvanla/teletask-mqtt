@@ -15,6 +15,7 @@ const teletask = new Teletask.connect(
 )
 
 teletask.on('report', (report) => {
+  console.log('report received')
   const { fnc, number } = report
   const topic = `teletask/${fnc}/${number}`
   let message
@@ -28,6 +29,16 @@ teletask.on('report', (report) => {
     case Teletask.functions.dimmer:
       message = report['status'].toString()
       break
+    case Teletask.functions.motor:
+      if (report['motorstopped']) {
+        console.log('motorstopped')
+        message = report['motorvalue'].toString()
+      }
+      else {
+        console.log('INFO: motor running, ignore message')
+        return
+      }
+
     default:
   }
   if (message) {
@@ -41,6 +52,7 @@ teletask.on('report', (report) => {
 teletask.log(Teletask.functions.relay)
 teletask.log(Teletask.functions.sensor)
 teletask.log(Teletask.functions.dimmer)
+teletask.log(Teletask.functions.motor)
 
 const mqtt = require('mqtt').connect(settings.mqtt)
 
@@ -62,6 +74,9 @@ mqtt.on('message', (topic, message) => {
           : Teletask.settings.off
       break
     case Teletask.functions.dimmer:
+      value = parseInt(message)
+      break
+    case Teletask.functions.motor:
       value = parseInt(message)
       break
     default:
