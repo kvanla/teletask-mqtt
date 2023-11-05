@@ -22,9 +22,8 @@ var connect = function(host, port, callback){
 	socket.connect(port, host, function(){
 		console.log('starting up new connection');
 		if(typeof callback === 'function'){	callback(); }
-		keepaliveInterval = setInterval(self.keepalive, 1000);
+		keepaliveInterval = setInterval(self.keepalive, 1000 * 20); // send keep alive every 20 seconds, at least every 1 min a message is needed to keep connection alive
 	});
-
 
 
 	socket.on('data', function(data){
@@ -65,13 +64,11 @@ var connect = function(host, port, callback){
 
 	this.write = function(data, callback){
 		socket.write(data.toBinary(), callback);
-/*		var timeout = setTimeout(function(){
-			throw "Acknowledge timeout (1000ms)";
-		}, 1000);*/
 	};
 
 	this.set = function(fnc,number, setting, data){
 	    var request = new Set(fnc, number,setting);
+		console.log('request is', request)
 	    this.write(request);
 		};
 

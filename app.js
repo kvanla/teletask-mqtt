@@ -15,7 +15,7 @@ const teletask = new Teletask.connect(
 )
 
 teletask.on('report', (report) => {
-  console.log('report received')
+  console.log('INFO: report received')
   const { fnc, number } = report
   const topic = `teletask/${fnc}/${number}`
   let message
@@ -77,7 +77,7 @@ mqtt.on('message', (topic, message) => {
       value = parseInt(message)
       break
     case Teletask.functions.motor:
-      value = parseInt(message)
+      value = 'position/'+ parseInt(message)
       break
     default:
   }
