@@ -27,6 +27,9 @@ module.exports = {
 		heatplus: 107,
 	},
 
+	// motor
+	motor_value: 11,
+
 
 	getKey: utils.getKey
 }

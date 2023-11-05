@@ -77,14 +77,13 @@ mqtt.on('message', (topic, message) => {
       value = parseInt(message)
       break
     case Teletask.functions.motor:
-      value=11
+      value=Teletask.settings.motor_value
       extra = parseInt(message)
-      teletask.set(Teletask.functions[fnc], number, value, extra)
-      return
+      break
       
     default:
   }
-  teletask.set(Teletask.functions[fnc], number, value)
+  teletask.set(Teletask.functions[fnc], number, value, extra)
 })
 
 mqtt.on('error', (error) => {
