@@ -67,7 +67,7 @@ var connect = function(host, port, callback){
 	};
 
 	this.set = function(fnc,number, setting, data){
-	    var request = new Set(fnc, number,setting);
+	    var request = new Set(fnc, number,setting, data);
 		console.log('request is', request)
 	    this.write(request);
 		};

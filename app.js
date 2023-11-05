@@ -77,8 +77,11 @@ mqtt.on('message', (topic, message) => {
       value = parseInt(message)
       break
     case Teletask.functions.motor:
-      value = 'position/'+ parseInt(message)
-      break
+      value=11
+      extra = parseInt(message)
+      teletask.set(Teletask.functions[fnc], number, value, extra)
+      return
+      
     default:
   }
   teletask.set(Teletask.functions[fnc], number, value)

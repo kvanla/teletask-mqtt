@@ -56,7 +56,13 @@ KeepAlive.prototype.constructor = KeepAlive;
 Set = function(fnc,number, setting, data){
 	if(typeof number != 'number'){number = parseInt(number);}
 	this.command = commands.set;
-	this.parameters = [1,fnc,0, number,setting];
+	if (data === undefined) {
+		this.parameters = [1,fnc,0, number,setting];
+	}
+	else {
+		this.parameters = [1,fnc,0, number,setting,data];
+	}
+
 };
 Set.prototype = new Request();
 Set.prototype.constructor = Set;
