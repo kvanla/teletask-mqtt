@@ -17,7 +17,7 @@
     "teletask",
     "domotics"
   ],
-  "author": "Sille Van Landschoot <info@sillevl.be>",
+  "author": "Kevin Van Landuyt, based on work by Sille Van Landschoot <info@sillevl.be>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/sillevl/teletask-mqtt/issues"

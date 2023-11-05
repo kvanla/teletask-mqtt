@@ -15,7 +15,7 @@
     "home",
     "automation"
   ],
-  "author": "Sille Van Landschoot <info@sillevl.be> (http://www.sillevl.be/)",
+  "author": "Kevin Van Landuyt, based on work by Sille Van Landschoot <info@sillevl.be>",
   "license": "ISC",
   "devDependencies": {
     "chai": "^2.3.0",
