@@ -22,7 +22,7 @@ var connect = function(host, port, callback){
 	socket.connect(port, host, function(){
 		console.log('starting up new connection');
 		if(typeof callback === 'function'){	callback(); }
-		keepaliveInterval = setInterval(self.keepalive, 1000 * 20); // send keep alive every 20 seconds, at least every 1 min a message is needed to keep connection alive
+		keepaliveInterval = setInterval(self.keepalive, 1000 * 10); // send keep alive every 20 seconds, at least every 1 min a message is needed to keep connection alive
 	});
 
 
@@ -68,7 +68,6 @@ var connect = function(host, port, callback){
 
 	this.set = function(fnc,number, setting, data){
 	    var request = new Set(fnc, number,setting, data);
-		console.log('request is', request)
 	    this.write(request);
 		};
 

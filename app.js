@@ -43,7 +43,12 @@ teletask.on('report', (report) => {
   }
   if (message) {
     console.log(`INFO: MQTT Publish at ${topic}: ${message}`)
-    mqtt.publish(topic, message, { retain: true })
+    mqtt.publish(topic, message, { qos: 1 ,retain: true }, (error) => {
+      if (error) {
+        console.error(`ERROR: MQTT publish failed: ${error}`)
+        process.exit(1);
+      }
+    })
   } else {
     console.log(`WARNING: Function (${fnc}) not supported`)
   }
@@ -66,6 +71,7 @@ mqtt.on('message', (topic, message) => {
   const fnc = topic.split('/')[1]
   const number = topic.split('/')[2]
   let value = ''
+  let extra = undefined
   switch (Teletask.functions[fnc]) {
     case Teletask.functions.relay:
       value =
