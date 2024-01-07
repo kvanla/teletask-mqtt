@@ -11,7 +11,11 @@ const Teletask = require('node-teletask')
 const teletask = new Teletask.connect(
   settings.teletask.host,
   settings.teletask.port,
-  () => console.log(`Connected to TeleTask central (${settings.teletask.host}:${settings.teletask.port})`)
+  () => {
+    console.log(`Connected to TeleTask central (${settings.teletask.host}:${settings.teletask.port})`)
+    setInterval(()=> {console.log('scheduled shutdown');process.exit(1)}, 2 * 60 * 60 * 1000)
+
+}
 )
 
 teletask.on('report', (report) => {
